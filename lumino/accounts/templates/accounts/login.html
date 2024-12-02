@@ -1,0 +1,24 @@
+{% load crispy_forms_tags %}
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-4">
+    <div class="card border-dark">
+      <h4 class="card-header">
+        Login
+      </h4>
+      <div class="card-body">
+        {% if login_error %}
+          <p class="text-danger"><i class="bi bi-emoji-frown"></i> Incorrect username or password.</p>
+        {% else %}
+          {% if next %}
+              <p class="text-danger"><i class="bi bi-shield-exclamation"></i> Please login to view this page.</p>
+          {% endif %}
+        {% endif %}
+        {% crispy form %}
+      </div>
+      <div class="card-footer">
+        Don't have an account? <a href="{% url 'signup' %}">Sign up</a> here.
+      </div>
+    </div>
+  </div>
+</div>

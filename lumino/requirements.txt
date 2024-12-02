@@ -1,6 +1,8 @@
 # Project requirements
 django
+pillow
 ipython
+crispy-bootstrap5==2024.10
 # Test requirements
 pytest-django
 model-bakery

@@ -9,12 +9,14 @@ class Subject(models.Model):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=100)
     teacher = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name='subjects', on_delete=models.CASCADE
+        settings.AUTH_USER_MODEL,
+        related_name='subjects',
+        on_delete=models.CASCADE,
     )
     students = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        through='Enrollment',
-        through_fields=('student', 'subject'),
+        through='users.Enrollment',
+        related_name='enrolled_subjects',
     )
 
     class Meta:
@@ -24,14 +26,14 @@ class Subject(models.Model):
         return f'{self.code}: {self.name}'
 
     def get_absolute_url(self):
-        return reverse('subjects:subject-detail', kwargs={'subject_pk': self.pk})
+        return reverse('subjects:subject-detail', kwargs={'code': self.code})
 
 
 class Lesson(models.Model):
     title = models.CharField(max_length=100)
-    content = models.TextField(blank=True)
+    content = models.TextField(blank=True, null=True)
     subject = models.ForeignKey(
-        'subjects.Subject',
+        Subject,
         related_name='lessons',
         on_delete=models.CASCADE,
     )

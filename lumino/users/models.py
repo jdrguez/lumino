@@ -16,28 +16,26 @@ class Enrollment(models.Model):
         on_delete=models.CASCADE,
     )
     enrolled_at = models.DateField(auto_now_add=True)
-    mark = models.IntegerField(blank=True, null=True)
+    mark = models.PositiveSmallIntegerField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.student} {self.subject} enrolled at {self.enrolled_at}'
 
 
 class Profile(models.Model):
-    STUDENT = 'S'
-    TEACHER = 'T'
-    ROLES_CHOICES = {
-        STUDENT: 'student',
-        TEACHER: 'teacher',
-    }
+    class Role(models.TextChoices):
+        STUDENT = 'S', 'student'
+        TEACHER = 'T', 'teacher'
+
+    role = models.CharField(
+        max_length=1,
+        choices=Role,
+        default=Role.STUDENT,
+    )
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         related_name='profile',
         on_delete=models.CASCADE,
-    )
-    role = models.CharField(
-        max_length=1,
-        choices=ROLES_CHOICES,
-        default=STUDENT,
     )
     avatar = models.ImageField(
         blank=True,
@@ -45,3 +43,7 @@ class Profile(models.Model):
         upload_to='avatars',
         default='avatars/noavatar.png',
     )
+    bio = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.role}'
