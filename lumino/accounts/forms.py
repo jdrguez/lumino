@@ -16,7 +16,7 @@ class LoginForm(forms.Form):
         self.helper.layout = Layout(
             FloatingField('username'),
             FloatingField('password'),
-            Submit('login', 'Login', css_class='w-100 mt-2 mb-2'),
+            Submit('login', 'Login', css_class='w-100 mt-4 mb-2'),
         )
 
 

@@ -1,0 +1,98 @@
+/* Navbar styles */
+.navbar {
+  background-color: #f2f2f2; /* Color de fondo predominante */
+  border-bottom: 1px solid #d8d0f2; /* Color de borde */
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #1b3c59; /* Color oscuro para el texto */
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+  color: #1b3c59; /* Color oscuro para el texto */
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #f2c53d; /* Color de resaltado */
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  background-color: #1b3c59; /* Color del icono del toggler */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background-color: #f2f2f2;
+
+  color: #1b3c59; /* Color de texto oscuro */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el body ocupe al menos el 100% de la altura de la ventana */
+}
+
+.content {
+  flex: 1; /* Permite que el contenido ocupe el espacio disponible */
+  padding: 20px; /* Espaciado interno */
+}
+
+.footer {
+  background: #1b3c59; /* Color de fondo del footer */
+  color: #f2f2f2; /* Color claro para el texto */
+  padding: 40px 0;
+}
+
+.footer h5 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.footer a {
+  color: #f2f2f2; /* Color claro para los enlaces */
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  color: #f2c53d; /* Color de resaltado para enlaces */
+}
+
+.social-icons a {
+  margin: 0 10px;
+  font-size: 24px;
+  transition: transform 0.3s;
+  color: #f2f2f2; /* Color claro para iconos sociales */
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #f2c53d; /* Color de resaltado para iconos sociales */
+}
+
+@media (max-width: 991px) {
+  .navbar-nav {
+    text-align: center;
+    background-color: rgba(
+      27,
+      60,
+      89,
+      0.8
+    ); /* Fondo oscuro para el menú móvil */
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .navbar-nav .nav-link {
+    display: block;
+    margin: 0.5rem 0;
+  }
+}

@@ -16,6 +16,8 @@ Including another URLconf
 """
 
 import accounts.views
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
@@ -25,4 +27,4 @@ urlpatterns = [
     path('loout/', accounts.views.user_logout, name='logout'),
     path('signup/', accounts.views.user_signup, name='signup'),
     path('sibjects/', include('subjects.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
