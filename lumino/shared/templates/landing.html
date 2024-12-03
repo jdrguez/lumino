@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="hero-section">
+    <h1 class="hero-title">Bienvenido a Lumino</h1>
+    <p class="hero-subtitle">Descubre la forma más fácil de aprender</p>
+    <div class="btn-container">
+      <button class="btn btn-custom btn-login"> <a href={% url "login" %} class='text-decoration-none text-light'>Login</a></button>
+      <button class="btn btn-custom btn-signup"> <a href={% url "signup" %} class='signup'>Signup</a></button>
+    </div>
+  </div>
+
+
+{% endblock content %}
