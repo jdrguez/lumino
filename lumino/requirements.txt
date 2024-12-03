@@ -1,11 +1,10 @@
+# Test requirements
+pytest-django
+model-bakery
+faker
 # Project requirements
 django
 pillow
 ipython
 crispy-bootstrap5==2024.10
-# Test requirements
-pytest-django
-model-bakery
-faker
-django-browser-reload
-crispy-bootstrap5
+django-browser-reload==1.17.0

@@ -3,6 +3,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django import forms
 from django.contrib.auth import get_user_model
+from users.models import Profile
 
 
 class LoginForm(forms.Form):
@@ -49,4 +50,6 @@ class SignupForm(forms.ModelForm):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
         user = super().save(*args, **kwargs)
+        Profile.objects.create(user=user)
+
         return user

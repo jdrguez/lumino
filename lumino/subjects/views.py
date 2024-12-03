@@ -1,21 +1,30 @@
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
 from .models import Subject
-from django.shortcuts import redirect, render
 
 
 @login_required
 def subject_list(request):
-    subjects =  Subject.objects.filter(user=request.user)
-    return render(request, 'subjects/subject-list.html', dict(subjects = subjects))
-    
+    role = request.user.profile.get_role_display()
+
+    match role:
+        case 'student':
+            subjects = Subject.objects.filter(students=request.user)
+        case 'teacher':
+            subjects = Subject.objects.filter(teacher=request.user)
+
+    return render(request, 'subjects/subject-list.html', dict(subjects=subjects))
 
 
 def subject_detail():
     pass
 
 
-def subject_lessons():
-    pass
+def subject_lessons(request, code):
+    subject = Subject.objects.filter(code=code)
+    lessons = subject.lessons.all()
+    return render(request, 'subjects/subject_deiail.html', dict(lessons=lessons))
 
 
 def lesson_detail():
