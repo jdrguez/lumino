@@ -1,17 +1,13 @@
-{% load crispy_forms_tags %}
-
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
 <div class="row justify-content-center mt-5">
   <div class="col-md-4">
     <div class="card border-dark">
-      <h4 class="card-header">
-        Sign up
-      </h4>
-      <div class="card-body">
-        {% crispy form %}
-      </div>
+      <h4 class="card-header">Sign up</h4>
+      <div class="card-body">{% crispy form %}</div>
       <div class="card-footer">
         Already have an account? <a href="{% url 'login' %}">Login</a> here.
       </div>
     </div>
   </div>
 </div>
+{% endblock content %}

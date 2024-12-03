@@ -7,3 +7,5 @@ crispy-bootstrap5==2024.10
 pytest-django
 model-bakery
 faker
+django-browser-reload
+crispy-bootstrap5

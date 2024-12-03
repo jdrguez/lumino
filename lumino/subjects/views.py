@@ -1,9 +1,13 @@
 from django.contrib.auth.decorators import login_required
+from .models import Subject
+from django.shortcuts import redirect, render
 
 
 @login_required
 def subject_list(request):
-    pass
+    subjects =  Subject.objects.filter(user=request.user)
+    return render(request, 'subjects/subject-list.html', dict(subjects = subjects))
+    
 
 
 def subject_detail():
