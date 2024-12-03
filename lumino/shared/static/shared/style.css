@@ -180,3 +180,9 @@ font-family: 'Inter', sans-serif; /* o Poppins, o Roboto */
   text-decoration: none;
   color: var(--dark-blue);
 }
+
+.btn-primary:hover {
+  background-color: var(--light-purple);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

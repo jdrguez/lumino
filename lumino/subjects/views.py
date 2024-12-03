@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from .models import Subject
-
+from shared.decorators import validate_type_user
 
 @login_required
 def subject_list(request):
@@ -30,14 +30,16 @@ def lesson_detail():
     pass
 
 
-def add_lesson():
-    pass
 
+@validate_type_user
+def add_lesson(request):
+    return render(request, 'subjects:add_lesson.html')
 
+@validate_type_user
 def edit_lesson():
     pass
 
-
+@validate_type_user
 def delete_lesson():
     pass
 
@@ -45,6 +47,6 @@ def delete_lesson():
 def mark_list():
     pass
 
-
+@validate_type_user
 def edit_marks():
     pass
