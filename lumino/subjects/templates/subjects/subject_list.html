@@ -10,9 +10,11 @@
             <i class="bi bi-exclamation-triangle-fill me-2" style="font-size: 1.5rem;"></i>
             <span class="fw-bold">No te has enrolado en ninguna materia.</span>
         </div>
-        <button class="btn btn-primary" 
+        <button  
+        class="btn btn-primary" 
                 style="background-color: var(--dark-blue); color: white; border: none; border-radius: 20px; padding: 0.5rem 1.5rem; font-weight: bold; transition: all 0.3s ease;">
-        Enroll Up
+                
+                <a href="{% url 'subjects:enroll-subjects'%}">enroll</a>
         </button>
     </div>
 
@@ -23,6 +25,7 @@
 
     {% for subject in subjects %}
         {{subject.name}} 
+        <a href="{% url "subjects:subject-detail" subject.code %}">Ir al detalle</a>
         
     {% endfor %} 
 

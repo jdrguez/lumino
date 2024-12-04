@@ -1,10 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from subjects.models import Subject
 from django.contrib.auth.models import User
-from .models import Enrollment, Profile
+from django.shortcuts import redirect, render
 from django.urls import reverse
+
 from .forms import EditProfileForm
+from .models import Profile
+
 
 def edit_profile(request, username):
     user = User.objects.get(username=username)
@@ -20,24 +20,6 @@ def edit_profile(request, username):
 
 
 def request_certificate():
-    pass
-
-
-def enroll_subjects(request):
-    if request.method == 'POST':
-        subject_code = request.POST.get('subject-code')
-        if subject_code:
-            Enrollment.objects.create(
-                student=request.user,
-                subject=Subject.objects.filter(code=subject_code),
-            )
-            return redirect('subjects:subject-list')
-        else:
-            return HttpResponse('Tienes que legir al menos una!')
-    return render(request, 'users/add_enroll.html')
-
-
-def unenroll_subjects():
     pass
 
 
