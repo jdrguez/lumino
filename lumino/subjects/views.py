@@ -3,7 +3,7 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
 from shared.decorators import auth_teacher, validate_type_user
 
-from .forms import AddEnrollForm, AddLessonForm, EditLessonForm
+from .forms import AddEnrollForm, AddLessonForm, EditLessonForm, UnEnrollForm
 from .models import Subject
 
 
@@ -97,5 +97,14 @@ def enroll_subjects(request):
     return render(request, 'subjects/add_enroll.html', dict(form=form))
 
 
-def unenroll_subjects():
-    pass
+def unenroll_subjects(request):
+    if request.method == 'POST':
+        if (form := UnEnrollForm(request.user, data=request.POST)).is_valid():
+            subjects = form.cleaned_data['subjects']
+            for subject in subjects:
+                request.user.enrolled_subjects.remove(subject)
+        else:
+            return HttpResponseForbidden('Tienes que legir al menos una!')
+    else:
+        form = UnEnrollForm(request.user)
+    return render(request, 'subjects/add_enroll.html', dict(form=form))

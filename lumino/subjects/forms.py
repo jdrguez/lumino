@@ -35,3 +35,22 @@ class AddEnrollForm(forms.Form):
             Field('subjects'),
             Submit('enroll', 'Enroll'),
         )
+
+
+class UnEnrollForm(forms.Form):
+    subjects = forms.ModelMultipleChoiceField(
+        queryset=Subject.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
+
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['subjects'].queryset = user.enrolled_subjects.all()
+
+        self.helper = FormHelper()
+        self.helper.attrs = dict(novalidate=True)
+        self.helper.form_show_labels = False
+        self.helper.layout = Layout(
+            Field('subjects'),
+            Submit('enroll', 'Enroll'),
+        )

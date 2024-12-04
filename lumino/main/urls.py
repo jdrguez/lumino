@@ -23,7 +23,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('', shared.views.landing, name='landing'),
+    path('', shared.views.index, name='index'),
     path('admin/', admin.site.urls),
     path('login/', accounts.views.user_login, name='login'),
     path('logout/', accounts.views.user_logout, name='logout'),

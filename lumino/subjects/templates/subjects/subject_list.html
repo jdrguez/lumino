@@ -16,6 +16,15 @@
                 
                 <a href="{% url 'subjects:enroll-subjects'%}">enroll</a>
         </button>
+
+        <button  
+        class="btn btn-primary" 
+                style="background-color: var(--dark-blue); color: white; border: none; border-radius: 20px; padding: 0.5rem 1.5rem; font-weight: bold; transition: all 0.3s ease;">
+                
+                <a href="{% url 'subjects:unenroll-subjects'%}">unenroll</a>
+        </button>
+
+
     </div>
 
 
@@ -30,6 +39,12 @@
     {% endfor %} 
 
 
+    <button  
+        class="btn btn-primary" 
+                style="background-color: var(--dark-blue); color: white; border: none; border-radius: 20px; padding: 0.5rem 1.5rem; font-weight: bold; transition: all 0.3s ease;">
+                
+                <a href="{% url 'subjects:unenroll-subjects'%}">unenroll</a>
+        </button>
 
     
 
