@@ -16,3 +16,7 @@ class EnrollmentAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['role']
+
+class EnrollmentInLine(admin.TabularInline):
+    model = Enrollment
+    extra = 1
