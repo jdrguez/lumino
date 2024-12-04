@@ -1,0 +1,4 @@
+{% extends "base.html" %} {% block content %}
+<h1>{{subject.name}}</h1>
+<a href="{% url 'subjects:mark-list' subject.code %}">marks</a>
+{% endblock content %}

@@ -2,9 +2,6 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
-# Create your models here.
-
-
 class Subject(models.Model):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=100)
@@ -45,4 +42,4 @@ class Lesson(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('subjects:lesson-detail', kwargs={'lesson_pk': self.pk})
+        return reverse('subjects:lesson-detail', kwargs={'code': self.subject.code,'lesson_pk': self.pk})

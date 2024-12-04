@@ -1,0 +1,7 @@
+{% extends "base.html" %} {% block content %}
+{% for lesson in lessons %}
+<a href="{% url 'subjects:lesson-detail' subject.code lesson.pk %}">{{lesson.title}}</a>
+{{lesson.content}}
+{% endfor %}
+<a href="{%url 'subjects:add-lesson' subject.code%}">añade más</a>
+{% endblock content %}
