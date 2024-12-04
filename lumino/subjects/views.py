@@ -3,7 +3,7 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
 from shared.decorators import auth_teacher, validate_type_user
 
-from .forms import AddEnroll, AddLessonForm, EditLessonForm
+from .forms import AddEnrollForm, AddLessonForm, EditLessonForm
 from .models import Subject
 
 
@@ -86,13 +86,15 @@ def edit_marks():
 
 def enroll_subjects(request):
     if request.method == 'POST':
-        if (form := AddEnroll(request.user, data=[request.POST])).is_valid():
+        if (form := AddEnrollForm(request.user, data=request.POST)).is_valid():
             subjects = form.cleaned_data['subjects']
             for subject in subjects:
-                request.user.students_subjects.add(subject)
+                request.user.enrolled_subjects.add(subject)
         else:
             return HttpResponseForbidden('Tienes que legir al menos una!')
-    return render(request, 'subjects/add_enroll.html')
+    else:
+        form = AddEnrollForm(request.user)
+    return render(request, 'subjects/add_enroll.html', dict(form=form))
 
 
 def unenroll_subjects():
