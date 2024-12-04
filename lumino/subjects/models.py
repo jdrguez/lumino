@@ -63,4 +63,4 @@ class Enrollment(models.Model):
     mark = models.PositiveSmallIntegerField(blank=True, null=True)
 
     def __str__(self):
-        return f'{self.student} {self.subject} enrolled at {self.enrolled_at}'
+        return f'{self.student} {self.subject} enrolled at {self.enrolled_at} {self.mark}'
