@@ -1,6 +1,8 @@
 {% extends "base.html" %} 
 {% block content %}
-    {% for student in students %}
-        {{student__Enrollment.mark}}
+    {{subject}}
+    {% for enroll in enrollments %}
+        <h1>{{enroll.student}}</h1>
+        <h3>{{enroll.mark}}</h3>
     {% endfor %}
 {% endblock content %}

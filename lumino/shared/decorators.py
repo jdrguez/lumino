@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.http import HttpResponseForbidden
 from subjects.models import Subject
 
@@ -26,3 +27,12 @@ def auth_teacher(func):
             return HttpResponseForbidden('no eres el profe de esta asignatura')
 
     return wrapper
+
+
+def get_all_emails():
+    user = get_user_model()
+    users = list(user.objects.all())
+    emails = []
+    for user in users:
+        emails.append(user.email)
+    return emails

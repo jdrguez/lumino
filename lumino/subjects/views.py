@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from shared.decorators import auth_teacher, validate_type_user
 
 from .forms import AddEnrollForm, AddLessonForm, EditLessonForm, UnEnrollForm
-from .models import Subject
+from .models import Enrollment, Subject
 
 
 @login_required
@@ -26,7 +26,7 @@ def subject_list(request):
 def subject_detail(request, code):
     subject = Subject.objects.get(code=code)
     lessons = subject.lessons.all()
-    return render(request, 'subjects/subject_lessons.html', dict(lessons=lessons, subject=subject))
+    return render(request, 'subjects/subject_detail.html', dict(lessons=lessons, subject=subject))
 
 
 def lesson_detail(request, code, lesson_pk):
@@ -75,8 +75,8 @@ def delete_lesson(request, code, lesson_pk):
 @validate_type_user
 def mark_list(request, code):
     subject = Subject.objects.get(code=code)
-    students = subject.students.all()
-    return render(request, 'subjects/mark_list.html', dict(students=students))
+    enrollments = Enrollment.objects.filter(subject=subject)
+    return render(request, 'subjects/mark_list.html', dict(enrollments=enrollments))
 
 
 @validate_type_user

@@ -42,6 +42,8 @@ def user_signup(request):
             user = form.save()
             login(request, user)
             return redirect('subjects:subject-list')
+
     else:
         form = SignupForm()
+
     return render(request, 'accounts/signup.html', dict(form=form))

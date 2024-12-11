@@ -3,6 +3,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 from django import forms
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
+from shared.decorators import get_all_emails
 from users.models import Profile
 
 
@@ -46,10 +48,15 @@ class SignupForm(forms.ModelForm):
             Submit('signup', 'Sign up', css_class='btn-info w-100 mt-2 mb-2'),
         )
 
+    def clean_email(self):
+        emails = get_all_emails()
+        if self.cleaned_data['email'] in emails:
+            raise ValidationError(':( Email existente')
+        return self.cleaned_data['email']
+
     def save(self, *args, **kwargs):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
         user = super().save(*args, **kwargs)
         Profile.objects.create(user=user)
-
         return user
