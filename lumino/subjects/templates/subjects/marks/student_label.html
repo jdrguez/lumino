@@ -1,0 +1,6 @@
+{% load user_extras %}
+
+<span>
+  {% include "users/user/includes/avatar.html" with user=student size="30x30" %}
+  <a href="{% url 'user-detail' student.username %}" class="ms-1">{{ student|fullname }}</a>
+</span>

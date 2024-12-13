@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -40,6 +41,7 @@ def user_signup(request):
     if request.method == 'POST':
         if (form := SignupForm(request.POST)).is_valid():
             user = form.save()
+            messages.success(request, 'Welcome to Lumino. Nice to see you!')
             login(request, user)
             return redirect('subjects:subject-list')
 
