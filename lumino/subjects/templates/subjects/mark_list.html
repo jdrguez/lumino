@@ -5,4 +5,14 @@
         <h1>{{enroll.student}}</h1>
         <h3>{{enroll.mark}}</h3>
     {% endfor %}
+
+   
+
+        <a href="{% url "subjects:edit-marks" subject.code %}">Editar las calificaciones</a>
+    
+    
+   
+
+
+
 {% endblock content %}

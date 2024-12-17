@@ -1,9 +1,19 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.forms import modelformset_factory
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from shared.decorators import auth_teacher, validate_type_user
 
-from .forms import AddEnrollForm, AddLessonForm, EditLessonForm, EditMarkForm, UnEnrollForm
+from .forms import (
+    AddEnrollForm,
+    AddLessonForm,
+    EditLessonForm,
+    EditMarkForm,
+    EditMarkFormSetHelper,
+    UnEnrollForm,
+)
 from .models import Enrollment, Subject
 
 
@@ -80,15 +90,33 @@ def mark_list(request, code):
 
 
 @validate_type_user
-def edit_marks(request):
+def edit_marks(request, subject_code):
+    subject = Subject.objects.get(code=subject_code)
+
+    """
+    breadcrumbs = Breadcrumbs()
+    breadcrumbs.add('My subjects', reverse('subjects:subject-list'))
+    breadcrumbs.add(subject.code, reverse('subjects:subject-detail', args=[subject.code]))
+    breadcrumbs.add('Marks', reverse('subjects:mark-list', args=[subject.code]))
+    breadcrumbs.add('Edit marks')
+    """
+    MarkFormSet = modelformset_factory(Enrollment, EditMarkForm, extra=0)
+    queryset = subject.enrolled_subjects.all()
     if request.method == 'POST':
-        if (form := EditMarkForm(request.user, data=request.POST)).is_valid():
-            pass
-        else:
-            return HttpResponseForbidden('Tienes que legir al menos una!')
+        if (formset := MarkFormSet(queryset=queryset, data=request.POST)).is_valid():
+            formset.save()
+            messages.add_message(request, messages.SUCCESS, 'Marks were successfully saved.')
+            return redirect(reverse('subjects:edit-marks', kwargs={'subject_code': subject_code}))
     else:
-        form = EditMarkForm(request.user)
-    return render(request, 'subjects/add_enroll.html', dict(form=form))
+        formset = MarkFormSet(queryset=queryset)
+    helper = EditMarkFormSetHelper()
+    return render(
+        request,
+        'subjects/marks/edit_marks.html',
+        dict(subject=subject, formset=formset, helper=helper),
+    )
+
+    # breadcrumbs=breadcrumbs
 
 
 def enroll_subjects(request):

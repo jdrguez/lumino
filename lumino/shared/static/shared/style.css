@@ -20,6 +20,20 @@ body {
   flex-direction: column;
 }
 
+.prueba {
+  display: grid;
+  grid-template-areas: "sidebar main main";
+}
+
+sidebar {
+  grid-area: sidebar;
+}
+
+main {
+  grid-area: main;
+  height: 1000px;
+}
+
 .navbar {
   background-color: var(--purple);
 }

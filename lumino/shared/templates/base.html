@@ -9,24 +9,27 @@
   <link rel="stylesheet" href="{% static 'bootstrap-icons/font/bootstrap-icons.min.css' %}">
   <link rel="stylesheet" href="{% static 'shared/style.css' %}">
   <title>Lumino</title>
-
 </head>
 <body>
- 
   {% include "navbar.html" %}
+  <div class="prueba">
+    
+    
+    <main>
+  
+        {% block content %}
 
-  <div class="content">
-    {% block content %}
-
-      
+          
 
 
 
-    {% endblock content %}
+        {% endblock content %}
+
+    </main>
+    <sidebar>Esto es un sidebar</sidebar>
   </div>
 
-  {% include "footer.html" %} 
-
+  {% include "footer.html" %}
   <script type="text/javascript" src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
