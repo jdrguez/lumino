@@ -9,20 +9,23 @@
 html,
 body {
   height: 100%;
-  /* Asegura que ocupen toda la altura */
 }
 
 body {
   font-family: "Inter", sans-serif;
-  /* o Poppins, o Roboto */
   background-color: var(--light-gray);
   display: flex;
   flex-direction: column;
 }
 
-.prueba {
+.main-container {
   display: grid;
   grid-template-areas: "sidebar main main";
+  flex: 1;
+  padding: 20px;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto;
+  gap: 100px;
 }
 
 sidebar {
@@ -31,7 +34,6 @@ sidebar {
 
 main {
   grid-area: main;
-  height: 1000px;
 }
 
 .navbar {
@@ -75,16 +77,12 @@ main {
 
 .content {
   flex: 1;
-  /* Permite que el contenido ocupe el espacio disponible */
   padding: 20px;
-  /* Espaciado interno */
 }
 
 .footer {
   background: #1b3c59;
-  /* Color de fondo del footer */
   color: #f2f2f2;
-  /* Color claro para el texto */
   padding: 40px 0;
 }
 
@@ -95,14 +93,12 @@ main {
 
 .footer a {
   color: #f2f2f2;
-  /* Color claro para los enlaces */
   text-decoration: none;
 }
 
 .footer a:hover {
   text-decoration: underline;
   color: #f2c53d;
-  /* Color de resaltado para enlaces */
 }
 
 .social-icons a {
@@ -110,13 +106,11 @@ main {
   font-size: 24px;
   transition: transform 0.3s;
   color: #f2f2f2;
-  /* Color claro para iconos sociales */
 }
 
 .social-icons a:hover {
   transform: scale(1.2);
   color: #f2c53d;
-  /* Color de resaltado para iconos sociales */
 }
 
 .hero-section {
@@ -455,4 +449,8 @@ main {
   transform: scale(var(--nav-active-scale));
   visibility: visible;
   opacity: 1;
+}
+
+#sidebar .nav-link:hover {
+  background-color: #495057;
 }
