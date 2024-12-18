@@ -20,7 +20,7 @@ body {
 
 .main-container {
   display: grid;
-  grid-template-areas: "sidebar main main";
+  grid-template-areas: "sidebar main ";
   flex: 1;
   padding: 20px;
   grid-template-columns: 200px 1fr;
@@ -449,6 +449,10 @@ main {
   transform: scale(var(--nav-active-scale));
   visibility: visible;
   opacity: 1;
+}
+
+#sidebar {
+  background-color: var(--dark-blue);
 }
 
 #sidebar .nav-link:hover {

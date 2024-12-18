@@ -36,7 +36,6 @@ class SignupForm(forms.ModelForm):
 
         for field in self.Meta.required:
             self.fields[field].required = True
-
         self.helper = FormHelper()
         self.helper.attrs = dict(novalidate=True)
         self.helper.layout = Layout(

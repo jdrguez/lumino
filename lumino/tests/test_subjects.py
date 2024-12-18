@@ -3,10 +3,12 @@ import re
 from http import HTTPStatus
 
 import pytest
+from django.core.mail import EmailMessage
 from model_bakery import baker
 from pytest_django.asserts import assertContains, assertNotContains, assertRedirects
 
 from subjects.models import Enrollment
+from subjects.tasks import deliver_certificate
 
 # ==============================================================================
 # STUDENTS
@@ -175,12 +177,73 @@ def test_lesson_detail_for_students(client, student):
 
 
 @pytest.mark.django_db
-def test_lesson_detail_is_forbidden_for_non_enrolled_students(client, teacher):
+def test_lesson_detail_is_forbidden_for_non_enrolled_students(client, student):
     subject = baker.make_recipe('tests.subject')
     lesson = baker.make_recipe('tests.lesson', subject=subject)
-    client.force_login(teacher)
+    client.force_login(student)
     response = client.get(f'/subjects/{subject.code}/lessons/{lesson.pk}/')
     assert response.status_code == HTTPStatus.FORBIDDEN
+
+
+@pytest.mark.django_db
+def test_request_grade_certificate_link_appears_when_all_subjects_have_mark(client, student):
+    baker.make_recipe('tests.enrollment', student=student, _quantity=10)
+    client.force_login(student)
+    response = client.get('/subjects/')
+    assertContains(response, 'href="/subjects/certificate/"')
+
+
+@pytest.mark.django_db
+def test_request_grade_certificate_link_does_not_appear_when_all_subjects_do_not_have_mark(
+    client, student
+):
+    baker.make_recipe('tests.enrollment', mark=None, student=student, _quantity=10)
+    client.force_login(student)
+    response = client.get('/subjects/')
+    assertNotContains(response, 'href="/subjects/certificate/"')
+
+
+@pytest.mark.django_db
+def test_request_grade_certificate_is_forbidden_when_all_subjects_do_not_have_mark(client, student):
+    baker.make_recipe('tests.enrollment', mark=None, student=student, _quantity=10)
+    client.force_login(student)
+    response = client.get('/subjects/certificate/')
+    assert response.status_code == HTTPStatus.FORBIDDEN
+
+
+@pytest.mark.django_db
+def test_request_grade_certificate_is_forbidden_for_teachers(client, teacher):
+    client.force_login(teacher)
+    response = client.get('/subjects/certificate/')
+    assert response.status_code == HTTPStatus.FORBIDDEN
+
+
+@pytest.mark.django_db
+def test_request_grade_certificate_works(client, student, settings, monkeypatch):
+    def mock_deliver_certificate(base_url, test_student):
+        deliver_certificate(base_url, test_student)
+
+    def mock_send_email(*args, **kwargs):
+        assert True
+
+    try:
+        monkeypatch.setattr(deliver_certificate, 'delay', mock_deliver_certificate)
+        monkeypatch.setattr(EmailMessage, 'send', mock_send_email)
+        certificate = settings.CERTIFICATES_DIR / f'{student.username}_grade_certificate.pdf'
+
+        client.force_login(student)
+        response = client.get('/subjects/certificate/')
+        assert response.status_code == HTTPStatus.OK
+
+        clean_response = re.sub(r'<.*?>', '', response.content.decode())
+        clean_response = re.sub(r' {2,}', ' ', clean_response)
+        msg = f'You will get the grade certificate quite soon at {student.email}'
+        assert msg in clean_response
+        assert certificate.exists()
+    except Exception as err:
+        raise err
+    finally:
+        certificate.unlink(missing_ok=True)
 
 
 # ==============================================================================
@@ -533,7 +596,6 @@ def test_edit_marks_works_properly(client, teacher):
         payload[f'form-{enroll_idx}-id'] = enrollment.pk
         payload[f'form-{enroll_idx}-mark'] = random.randint(1, 10)
     response = client.post(f'/subjects/{subject.code}/marks/edit/', payload, follow=True)
-    print(response.content)
     assert response.status_code == HTTPStatus.OK
     assertContains(response, 'Marks were successfully saved.')
     for enroll_idx in range(num_enrollments):

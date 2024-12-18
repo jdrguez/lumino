@@ -20,7 +20,7 @@ def validate_type_user(func):
 def auth_teacher(func):
     def wrapper(*args, **kwargs):
         user = args[0].user
-        subject = Subject.objects.get(code=kwargs['code'])
+        subject = Subject.objects.get(code=kwargs['subject_code'])
         if user == subject.teacher:
             return func(*args, **kwargs)
         else:

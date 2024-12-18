@@ -33,22 +33,25 @@ def subject_list(request):
     )
 
 
-def subject_detail(request, code):
-    subject = Subject.objects.get(code=code)
+@login_required
+def subject_detail(request, subject_code):
+    subject = Subject.objects.get(code=subject_code)
     lessons = subject.lessons.all()
     return render(request, 'subjects/subject_detail.html', dict(lessons=lessons, subject=subject))
 
 
-def lesson_detail(request, code, lesson_pk):
-    subject = Subject.objects.get(code=code)
+@login_required
+def lesson_detail(request, subject_code, lesson_pk):
+    subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
     return render(request, 'subjects/lesson_detail.html', dict(lesson=lesson, subject=subject))
 
 
+@login_required
 @auth_teacher
 @validate_type_user
-def add_lesson(request, code):
-    subject = Subject.objects.get(code=code)
+def add_lesson(request, subject_code):
+    subject = Subject.objects.get(code=subject_code)
     if request.method == 'POST':
         if (form := AddLessonForm(request.POST)).is_valid():
             lesson = form.save(commit=False)
@@ -60,9 +63,11 @@ def add_lesson(request, code):
     return render(request, 'subjects/add_lesson.html', dict(form=form))
 
 
+@login_required
+@auth_teacher
 @validate_type_user
-def edit_lesson(request, code, lesson_pk):
-    subject = Subject.objects.get(code=code)
+def edit_lesson(request, subject_code, lesson_pk):
+    subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
     if request.method == 'POST':
         if (form := EditLessonForm(request.POST, instance=lesson)).is_valid():
@@ -74,21 +79,29 @@ def edit_lesson(request, code, lesson_pk):
     return render(request, 'subjects/edit_lesson.html', dict(lesson=lesson, form=form))
 
 
+@login_required
+@auth_teacher
 @validate_type_user
-def delete_lesson(request, code, lesson_pk):
-    subject = Subject.objects.get(code=code)
+def delete_lesson(request, subject_code, lesson_pk):
+    subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
     lesson.delete()
     return redirect(subject)
 
 
+@login_required
+@auth_teacher
 @validate_type_user
-def mark_list(request, code):
-    subject = Subject.objects.get(code=code)
+def mark_list(request, subject_code):
+    subject = Subject.objects.get(code=subject_code)
     enrollments = Enrollment.objects.filter(subject=subject)
-    return render(request, 'subjects/mark_list.html', dict(enrollments=enrollments))
+    return render(
+        request, 'subjects/mark_list.html', dict(enrollments=enrollments, subject=subject)
+    )
 
 
+@login_required
+@auth_teacher
 @validate_type_user
 def edit_marks(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
@@ -101,7 +114,7 @@ def edit_marks(request, subject_code):
     breadcrumbs.add('Edit marks')
     """
     MarkFormSet = modelformset_factory(Enrollment, EditMarkForm, extra=0)
-    queryset = subject.enrolled_subjects.all()
+    queryset = subject.enrollments.all()
     if request.method == 'POST':
         if (formset := MarkFormSet(queryset=queryset, data=request.POST)).is_valid():
             formset.save()
@@ -119,6 +132,7 @@ def edit_marks(request, subject_code):
     # breadcrumbs=breadcrumbs
 
 
+@login_required
 def enroll_subjects(request):
     if request.method == 'POST':
         if (form := AddEnrollForm(request.user, data=request.POST)).is_valid():
@@ -132,6 +146,7 @@ def enroll_subjects(request):
     return render(request, 'subjects/add_enroll.html', dict(form=form))
 
 
+@login_required
 def unenroll_subjects(request):
     if request.method == 'POST':
         if (form := UnEnrollForm(request.user, data=request.POST)).is_valid():
