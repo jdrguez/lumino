@@ -1,1 +1,25 @@
 {% extends "base.html" %}
+
+{% block content %}
+
+  <h1>{{user.name}}</h1>
+  <h2>{{user.surname}}</h2>
+  <p>{{user.profile.role}}</p>
+  <p>{{user.email}}</p>
+
+  <p>{{user.profile.bio}}</p>
+
+  <a href="{% url "users:edit-profile" user.username %}">Editar tu perfil</a>
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+

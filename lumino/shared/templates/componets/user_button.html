@@ -19,7 +19,7 @@
     <legend>Quick Start</legend>
     <ul>
       <li>
-        <button onclick="location.href='#'" type="button">
+        <button onclick="location.href='{% url "users:user-detail" request.user %}'" type="button">
           <svg
             width="14"
             height="14"
