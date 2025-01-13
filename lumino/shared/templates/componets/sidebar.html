@@ -8,18 +8,10 @@
                   <i class="fa-solid fa-home"></i> Inicio
               </a>
           </li>
+         
           <li>
-              <a href="#submenu1" data-bs-toggle="collapse" class="nav-link text-white">
-                  <i class="fa-solid fa-cog"></i> Tus cursos
-              </a>
-              <ul class="collapse" id="submenu1">
-                {% for subject in subjects %}
-                  <li>
-                      <a href="{% url "subjects:subject-detail" subject.code %}" class="nav-link text-white ms-3">{{subject.name}}</a>
-                  </li>
-                {% endfor %}
-              </ul>
           </li>
+    
           <li>
               <a href="#" class="nav-link text-white">
                   <i class="fa-solid fa-info-circle"></i> Acerca de

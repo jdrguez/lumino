@@ -1,5 +1,17 @@
 {% extends "base.html" %} 
 {% block content %}
+{% if messages %}
+        
+        <div class="messages d-flex justify-content-end ">
+            {% for message in messages  %}
+
+                <div class="alert alert-success {{message.tags}} z-3 position-absolute opacity-75" role="alert">{{message}}</div>
+            
+            {% endfor %}
+        </div>
+    
+    
+    {% endif %}
     {{subject}}
     {% for enroll in enrollments %}
         <h1>{{enroll.student}}</h1>

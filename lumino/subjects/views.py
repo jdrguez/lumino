@@ -44,6 +44,7 @@ def subject_detail(request, subject_code):
 def lesson_detail(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
+    messages.success(request, 'Marks were successfully saved.')
     return render(request, 'subjects/lesson_detail.html', dict(lesson=lesson, subject=subject))
 
 
@@ -118,7 +119,7 @@ def edit_marks(request, subject_code):
     if request.method == 'POST':
         if (formset := MarkFormSet(queryset=queryset, data=request.POST)).is_valid():
             formset.save()
-            messages.add_message(request, messages.SUCCESS, 'Marks were successfully saved.')
+            messages.success(request, 'Marks were successfully saved.')
             return redirect(reverse('subjects:edit-marks', kwargs={'subject_code': subject_code}))
     else:
         formset = MarkFormSet(queryset=queryset)
@@ -139,6 +140,8 @@ def enroll_subjects(request):
             subjects = form.cleaned_data['subjects']
             for subject in subjects:
                 request.user.enrolled_subjects.add(subject)
+            messages.success(request, 'Successfully enrolled in the chosen subjects.')
+            return redirect('subjects:subject-list')
         else:
             return HttpResponseForbidden('Tienes que legir al menos una!')
     else:
@@ -153,8 +156,10 @@ def unenroll_subjects(request):
             subjects = form.cleaned_data['subjects']
             for subject in subjects:
                 request.user.enrolled_subjects.remove(subject)
+            messages.warning(request, 'Successfully unenrolled from the chosen subjects.')
+            return redirect('subjects:subject-list')
         else:
-            return HttpResponseForbidden('Tienes que legir al menos una!')
+            return HttpResponseForbidden('Tienes que elegir al menos una!')
     else:
         form = UnEnrollForm(request.user)
     return render(request, 'subjects/add_enroll.html', dict(form=form))

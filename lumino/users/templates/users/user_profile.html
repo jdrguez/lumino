@@ -2,28 +2,42 @@
 {% load thumbnail %}
 
 {% block content %}
-  {% if request.user.profile.role == 'S' %}
-  <h1>Nombre {{user.first_name}}</h1>
-  <h2>Apellidos {{user.last_name}}</h2>
-  <p>{{user.profile.role}}</p>
+
+{% if messages %}
+        
+<div class="messages d-flex justify-content-end ">
+    {% for message in messages  %}
+
+        <div class="alert alert-info {{message.tags}} z-3 position-absolute opacity-75" role="alert">{{message}}</div>
+    
+    {% endfor %}
+</div>
+
+
+{% endif %}
+
+  <h1>{{user.first_name}} {{user.last_name}}</h1>
+
+  <p>{{user.profile.get_role}}</p>
   <p>{{user.email}}</p>
-  <h2>Student</h2>
-  {% elif request.user.profile.role == 'T' %}
-  <h2>Teacher</h2>
-  {% endif %}
+
 
   <p>{{user.profile.bio}}</p>
   {%thumbnail user.profile.avatar "200x200" crop="center" format="PNG" as thumb %}
     <img src="{{thumb.url}}" alt="Avatar">
   {%endthumbnail%}
+
   {% if request.user.username == user.username %}
 
 
   <a href="{% url "edit-profile"%}">Editar tu perfil</a>
-  {% endif %}
   
-  {% if request.user.profile.role == 'S' %}
-    <a href="{% url "users:leave" %}">Irte de lumino</a>
+  
+    {% if request.user.profile.role == 'S' %}
+      <a href="{% url "users:leave" %}">Irte de lumino</a>
+    {% endif %}
+
+
   {% endif %}
 {% endblock content %}
 

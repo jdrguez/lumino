@@ -3,6 +3,20 @@
 
 {% block content %}
 
+{% if messages %}
+        
+<div class="messages d-flex justify-content-end ">
+    {% for message in messages  %}
+
+        <div class="alert alert-info {{message.tags}} z-3 position-absolute opacity-75" role="alert">{{message}}</div>
+    
+    {% endfor %}
+</div>
+
+
+{% endif %}
+
+
 
 <div class="hero-section">
   <h1 class="hero-title">Bienvenido a Lumino</h1>

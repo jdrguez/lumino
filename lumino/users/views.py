@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
@@ -22,6 +23,7 @@ def edit_profile(request):
             if (form := EditProfileForm(request.POST, request.FILES, instance=profile)).is_valid():
                 profile = form.save(commit=False)
                 profile.save()
+                messages.success(request, 'User profile has been successfully saved.')
                 return redirect('users:user-detail', request.user.username)
         else:
             form = EditProfileForm(instance=profile)
@@ -39,4 +41,10 @@ def request_certificate(request):
 
 @login_required
 def leave(request):
-    return render(request, 'users/leave.html')
+    if request.user.profile.role == 'S':
+        user = User.objects.get(username=request.user)
+        user.delete()
+        messages.success(request, 'Good bye! Hope to see you soon.')
+        return redirect('index')
+    else:
+        return HttpResponseForbidden('Eres profesor no te puedes ir')

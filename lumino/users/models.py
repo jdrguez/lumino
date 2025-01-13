@@ -29,3 +29,10 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.role}'
+
+    def get_role(self):
+        match self.role:
+            case 'S':
+                return 'Student'
+            case 'T':
+                return 'Teacher'

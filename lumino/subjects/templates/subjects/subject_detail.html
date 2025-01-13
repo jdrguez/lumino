@@ -1,14 +1,31 @@
 {% extends "base.html" %} 
 
 {% block content %}
+{% if messages %}
+        
+<div class="messages d-flex justify-content-end ">
+    {% for message in messages  %}
+
+        <div class="alert alert-success {{message.tags}} z-3 position-absolute opacity-75" role="alert">{{message}}</div>
+    
+    {% endfor %}
+</div>
+
+
+{% endif %}
   <h1>{{subject.name}}</h1>
   
   {% for lesson in lessons %}
     <a href="{% url 'subjects:lesson-detail' subject.code lesson.pk %}">{{lesson.title}}</a>
   {{lesson.content}}
+  {% if request.user.profile.get_role == 'Teacher' %}
+    <a href="{% url 'subjects:edit-lesson' subject.code lesson.pk %}">editame</a>
+    <a href="{% url 'subjects:delete-lesson' subject.code lesson.pk %}">borrame wei</a>
+  {% endif %}
   
 {% endfor %}
-<a href="{%url 'subjects:add-lesson' subject.code%}">añade más</a>
-<a href="{% url 'subjects:mark-list' subject.code %}">marks</a>
+
+  <a href="{%url 'subjects:add-lesson' subject.code%}">añade más</a>
+  <a href="{% url 'subjects:mark-list' subject.code %}">marks</a>
 
 {% endblock content %}
