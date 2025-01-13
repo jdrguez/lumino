@@ -24,4 +24,4 @@ class Command(BaseCommand):
         if media_marks > 0:
             media_marks = media_marks / students_with_marks
 
-        self.stdout.write(self.style.SUCCESS(f'{enrollment}:{media_marks}'))
+        self.stdout.write(self.style.SUCCESS(f'{enrollment.subject.code}:{media_marks:.2f}'))

@@ -17,6 +17,7 @@ Including another URLconf
 
 import accounts.views
 import shared.views
+import users.views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -30,5 +31,9 @@ urlpatterns = [
     path('signup/', accounts.views.user_signup, name='signup'),
     path('subjects/', include('subjects.urls')),
     path('users/', include('users.urls')),
+    path('user/edit/', users.views.edit_profile, name='edit-profile'),
+    path('user/leave/', users.views.leave, name='leave'),
     path('__reload__/', include('django_browser_reload.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,21 +1,30 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 
 {% block content %}
-
-  <h1>{{user.name}}</h1>
-  <h2>{{user.surname}}</h2>
+  {% if request.user.profile.role == 'S' %}
+  <h1>Nombre {{user.first_name}}</h1>
+  <h2>Apellidos {{user.last_name}}</h2>
   <p>{{user.profile.role}}</p>
   <p>{{user.email}}</p>
+  <h2>Student</h2>
+  {% elif request.user.profile.role == 'T' %}
+  <h2>Teacher</h2>
+  {% endif %}
 
   <p>{{user.profile.bio}}</p>
-
-  <a href="{% url "users:edit-profile" user.username %}">Editar tu perfil</a>
-
-
-
-
+  {%thumbnail user.profile.avatar "200x200" crop="center" format="PNG" as thumb %}
+    <img src="{{thumb.url}}" alt="Avatar">
+  {%endthumbnail%}
+  {% if request.user.username == user.username %}
 
 
+  <a href="{% url "edit-profile"%}">Editar tu perfil</a>
+  {% endif %}
+  
+  {% if request.user.profile.role == 'S' %}
+    <a href="{% url "users:leave" %}">Irte de lumino</a>
+  {% endif %}
 {% endblock content %}
 
 

@@ -6,7 +6,7 @@ app_name = 'users'
 
 urlpatterns = [
     path('<str:username>/', views.user_detail, name='user-detail'),
-    path('edit/', views.edit_profile, name='edit-profile'),
+    path('user/edit/', views.edit_profile, name='edit-profile'),
+    path('user/leave/', views.leave, name='leave'),
     path('certificate/', views.request_certificate, name='request-certificate'),
-    path('leave/', views.leave, name='leave'),
 ]

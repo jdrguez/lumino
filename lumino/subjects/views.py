@@ -48,8 +48,8 @@ def lesson_detail(request, subject_code, lesson_pk):
 
 
 @login_required
-@auth_teacher
 @validate_type_user
+@auth_teacher
 def add_lesson(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
     if request.method == 'POST':
@@ -64,8 +64,8 @@ def add_lesson(request, subject_code):
 
 
 @login_required
-@auth_teacher
 @validate_type_user
+@auth_teacher
 def edit_lesson(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
@@ -80,8 +80,8 @@ def edit_lesson(request, subject_code, lesson_pk):
 
 
 @login_required
-@auth_teacher
 @validate_type_user
+@auth_teacher
 def delete_lesson(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
@@ -90,8 +90,8 @@ def delete_lesson(request, subject_code, lesson_pk):
 
 
 @login_required
-@auth_teacher
 @validate_type_user
+@auth_teacher
 def mark_list(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
     enrollments = Enrollment.objects.filter(subject=subject)
@@ -101,8 +101,8 @@ def mark_list(request, subject_code):
 
 
 @login_required
-@auth_teacher
 @validate_type_user
+@auth_teacher
 def edit_marks(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
 

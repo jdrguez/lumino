@@ -22,8 +22,8 @@ class Profile(models.Model):
     avatar = models.ImageField(
         blank=True,
         null=True,
-        upload_to='avatars',
-        default='avatars/noavatar.png',
+        upload_to='cache',
+        default='cache/noavatar.png',
     )
     bio = models.TextField(blank=True, null=True)
 
