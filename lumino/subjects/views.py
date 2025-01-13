@@ -44,7 +44,7 @@ def subject_detail(request, subject_code):
 def lesson_detail(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
-    messages.success(request, 'Marks were successfully saved.')
+    messages.success(request, 'Lesson was successfully deleted.')
     return render(request, 'subjects/lesson_detail.html', dict(lesson=lesson, subject=subject))
 
 
