@@ -4,7 +4,7 @@ from django.forms import modelformset_factory
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from shared.decorators import auth_teacher, validate_type_user, auth_student_subject
+from shared.decorators import auth_user_subject, validate_type_user
 
 from .forms import (
     AddEnrollForm,
@@ -34,14 +34,25 @@ def subject_list(request):
 
 
 @login_required
-## @auth_student_subject funciona para el test de esto pero salen mal otros :(
+@auth_user_subject
 def subject_detail(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
     lessons = subject.lessons.all()
-    return render(request, 'subjects/subject_detail.html', dict(lessons=lessons, subject=subject))
+    user_role = request.user.profile.get_role()
+    match user_role:
+        case 'Student':
+            user_mark = Enrollment.objects.get(subject=subject, student=request.user).mark
+        case 'Teacher':
+            user_mark = None
+    return render(
+        request,
+        'subjects/subject_detail.html',
+        dict(lessons=lessons, subject=subject, mark=user_mark),
+    )
 
 
 @login_required
+@auth_user_subject
 def lesson_detail(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
@@ -50,7 +61,8 @@ def lesson_detail(request, subject_code, lesson_pk):
 
 @login_required
 @validate_type_user
-@auth_teacher
+# @auth_teacher
+@auth_user_subject
 def add_lesson(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
     if request.method == 'POST':
@@ -67,7 +79,8 @@ def add_lesson(request, subject_code):
 
 @login_required
 @validate_type_user
-@auth_teacher
+# @auth_teacher
+@auth_user_subject
 def edit_lesson(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
@@ -83,7 +96,8 @@ def edit_lesson(request, subject_code, lesson_pk):
 
 @login_required
 @validate_type_user
-@auth_teacher
+# @auth_teacher
+@auth_user_subject
 def delete_lesson(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
@@ -94,7 +108,8 @@ def delete_lesson(request, subject_code, lesson_pk):
 
 @login_required
 @validate_type_user
-@auth_teacher
+# @auth_teacher
+@auth_user_subject
 def mark_list(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
     enrollments = Enrollment.objects.filter(subject=subject)
@@ -105,7 +120,8 @@ def mark_list(request, subject_code):
 
 @login_required
 @validate_type_user
-@auth_teacher
+# @auth_teacher
+@auth_user_subject
 def edit_marks(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
 

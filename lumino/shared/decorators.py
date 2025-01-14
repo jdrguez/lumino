@@ -17,16 +17,16 @@ def validate_type_user(func):
     return wrapper
 
 
-def auth_teacher(func):
-    def wrapper(*args, **kwargs):
-        user = args[0].user
-        subject = Subject.objects.get(code=kwargs['subject_code'])
-        if user == subject.teacher:
-            return func(*args, **kwargs)
-        else:
-            return HttpResponseForbidden('no eres el profe de esta asignatura')
+# def auth_teacher(func):
+#    def wrapper(*args, **kwargs):
+#        user = args[0].user
+#        subject = Subject.objects.get(code=kwargs['subject_code'])
+#        if user == subject.teacher:
+#            return func(*args, **kwargs)
+#        else:
+#            return HttpResponseForbidden('no eres el profe de esta asignatura')
 
-    return wrapper
+#    return wrapper
 
 
 def get_all_emails():
@@ -38,13 +38,23 @@ def get_all_emails():
     return emails
 
 
-def auth_student_subject(func):
-    def wrapper(request, *args, **kwargs):
+def auth_user_subject(func):
+    def wrapper(*args, **kwargs):
         subject = Subject.objects.get(code=kwargs['subject_code'])
-        user = request.user
-        if subject.students.filter(pk=user.pk).exists():
-            return func(request, *args, **kwargs)
-        else:
-            return HttpResponseForbidden('No estás matriculado en esta asignatura')
-    return wrapper
+        user = args[0].user
+        role = user.profile.get_role()
+        match role:
+            case 'Student':
+                if subject.students.filter(pk=user.pk).exists():
+                    return func(*args, **kwargs)
+                else:
+                    return HttpResponseForbidden('No estás matriculado en esta asignatura')
+            case 'Teacher':
+                if subject.teacher == user:
+                    return func(*args, **kwargs)
+                else:
+                    return HttpResponseForbidden('No eres el profesor de esta materia')
+            case _:
+                return HttpResponseForbidden('No se que pasa')
 
+    return wrapper

@@ -11,7 +11,15 @@
          
           <li>
           </li>
-    
+          
+            {% for subject in get_all_subjects %}
+                <li>
+                    <a href="{% url "subjects:subject-detail" subject.code %}">{{subject.name}}</a>
+                </li>
+            
+            {% endfor %}
+
+            
           <li>
               <a href="#" class="nav-link text-white">
                   <i class="fa-solid fa-info-circle"></i> Acerca de

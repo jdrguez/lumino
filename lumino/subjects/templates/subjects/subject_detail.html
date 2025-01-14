@@ -28,4 +28,15 @@
   <a href="{%url 'subjects:add-lesson' subject.code%}">añade más</a>
   <a href="{% url 'subjects:mark-list' subject.code %}">marks</a>
 
+
+  {% if mark %}
+  
+    
+    <p>Your mark for this subject:{{mark}}</p>
+  {% endif %}
+
+
+
+
+
 {% endblock content %}
