@@ -39,12 +39,11 @@ def get_all_emails():
 
 
 def auth_student_subject(func):
-    def wrapper(*args, **kwargs):
-        user = args[0].user
+    def wrapper(request, *args, **kwargs):
         subject = Subject.objects.get(code=kwargs['subject_code'])
-        if subject.objects.filter(students=user):
-            return func(*args, **kwargs)
+        user = request.user
+        if subject.students.filter(pk=user.pk).exists():
+            return func(request, *args, **kwargs)
         else:
-            return HttpResponseForbidden('no estas matriculado en esta asignatura')
-
+            return HttpResponseForbidden('No estás matriculado en esta asignatura')
     return wrapper

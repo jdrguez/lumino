@@ -4,7 +4,7 @@ from django.forms import modelformset_factory
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from shared.decorators import auth_teacher, validate_type_user
+from shared.decorators import auth_teacher, validate_type_user, auth_student_subject
 
 from .forms import (
     AddEnrollForm,
@@ -34,6 +34,7 @@ def subject_list(request):
 
 
 @login_required
+## @auth_student_subject funciona para el test de esto pero salen mal otros :(
 def subject_detail(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
     lessons = subject.lessons.all()
