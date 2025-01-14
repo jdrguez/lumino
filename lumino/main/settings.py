@@ -45,11 +45,13 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'django_browser_reload',
     'sorl.thumbnail',
+    'django_rq',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -88,6 +90,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
+
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+    },
 }
 
 

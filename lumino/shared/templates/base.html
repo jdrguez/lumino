@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +27,8 @@
 
     </main>
     <sidebar>{% include "componets/sidebar.html" %}</sidebar>
+    <a href="{% url 'setlang' 'en' %}?next={{ request.path }}">🇺🇸</a>
+    <a href="{% url 'setlang' 'es' %}?next={{ request.path }}">🇪🇸</a>
   </div>
 
   {% include "footer.html" %}

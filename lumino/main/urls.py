@@ -26,6 +26,8 @@ from django.urls import include, path
 urlpatterns = [
     path('', shared.views.index, name='index'),
     path('admin/', admin.site.urls),
+    path('setlang/<str:langcode>/', shared.views.setlang, name='setlang'),
+    path('django-rq/', include('django_rq.urls')),
     path('login/', accounts.views.user_login, name='login'),
     path('logout/', accounts.views.user_logout, name='logout'),
     path('signup/', accounts.views.user_signup, name='signup'),

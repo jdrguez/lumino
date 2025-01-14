@@ -10,7 +10,7 @@ def get_all_subjects(request) -> dict:
                     subjects = request.user.enrolled_subjects.all()
                 case 'Teacher':
                     subjects = request.user.subjects.all()
-            return {'get_all_subjects': subjects}
+            return {'subjects': subjects}
         except Enrollment.DoesNotExist:
             return {}
     else:

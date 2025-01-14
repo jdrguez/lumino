@@ -1,32 +1,38 @@
+{% load i18n %}
+
+
 <div class="container-fluid p-0 d-flex h-100">
   <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3  text-white" style="width: 250px;">
       <a href="#" class="navbar-brand text-white">Menú</a>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-              <a href="{% url "subjects:subject-list" %}" class="nav-link text-white">
+              <a href="{% url "subjects:subject-list" %}" class="nav-link text-white px-2">
                   <i class="fa-solid fa-home"></i> Inicio
               </a>
           </li>
          
-          <li>
-          </li>
-          
-            {% for subject in get_all_subjects %}
-                <li>
-                    <a href="{% url "subjects:subject-detail" subject.code %}">{{subject.name}}</a>
-                </li>
-            
-            {% endfor %}
+          <li class="nav-item">
+            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-1 align-middle">
+                <span class="ms-1 d-none d-sm-inline"> {% translate "My subjects" %} </span> </a>
+                <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                    {% for subject in get_all_subjects %}
+                    <li class"nav-item">
+                        <a href="{% url "subjects:subject-detail" subject.code %}" class="nav-link text-white">{{subject.name}}</a>
+                    </li>
+                
+                {% endfor %}
+            </ul>
+           
 
-            
+         </li>
           <li>
-              <a href="#" class="nav-link text-white">
+              <a href="#" class="nav-link text-white px-2">
                   <i class="fa-solid fa-info-circle"></i> Acerca de
               </a>
           </li>
           <li>
-              <a href="#" class="nav-link text-white">
+              <a href="#" class="nav-link text-white px-2">
                   <i class="fa-solid fa-sign-out-alt"></i> Salir
               </a>
           </li>

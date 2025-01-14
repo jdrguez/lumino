@@ -19,17 +19,9 @@ from .models import Enrollment, Subject
 
 @login_required
 def subject_list(request):
-    role = request.user.profile.get_role_display()
-    match role:
-        case 'student':
-            subjects = Subject.objects.filter(students=request.user)
-        case 'teacher':
-            subjects = Subject.objects.filter(teacher=request.user)
-
     return render(
         request,
         'subjects/subject_list.html',
-        dict(subjects=subjects, total_subjects=subjects.count()),
     )
 
 
