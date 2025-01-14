@@ -45,7 +45,7 @@ class Lesson(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            'subjects:lesson-detail', kwargs={'code': self.subject.code, 'lesson_pk': self.pk}
+            'subjects:lesson-detail', kwargs={'subject_code': self.subject.code, 'lesson_pk': self.pk}
         )
 
 

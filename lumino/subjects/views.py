@@ -45,7 +45,6 @@ def subject_detail(request, subject_code):
 def lesson_detail(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
-    messages.success(request, 'Lesson was successfully deleted.')
     return render(request, 'subjects/lesson_detail.html', dict(lesson=lesson, subject=subject))
 
 
@@ -75,7 +74,7 @@ def edit_lesson(request, subject_code, lesson_pk):
         if (form := EditLessonForm(request.POST, instance=lesson)).is_valid():
             lesson = form.save(commit=False)
             lesson.save()
-            return redirect(lesson)
+            messages.success(request, 'Changes were successfully saved.')
     else:
         form = EditLessonForm(instance=lesson)
     return render(request, 'subjects/edit_lesson.html', dict(lesson=lesson, form=form))
@@ -88,7 +87,8 @@ def delete_lesson(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
     lesson = subject.lessons.get(pk=lesson_pk)
     lesson.delete()
-    return redirect(subject)
+    messages.success(request, 'Lesson was successfully deleted.')
+    return redirect('subjects:subject-detail', subject_code=subject.code)
 
 
 @login_required
