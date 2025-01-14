@@ -58,7 +58,8 @@ def add_lesson(request, subject_code):
             lesson = form.save(commit=False)
             lesson.subject = subject
             lesson.save()
-            return redirect(lesson)
+            messages.success(request, 'Lesson was successfully added.')
+            return redirect(subject)
     else:
         form = AddLessonForm()
     return render(request, 'subjects/add_lesson.html', dict(form=form))

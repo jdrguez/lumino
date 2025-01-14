@@ -9,6 +9,18 @@
 {% endblock %}
 
 {% block content %}
+{% if messages %}
+
+<div class="messages d-flex justify-content-end ">
+    {% for message in messages %}
+
+    <div class="alert alert-success {{message.tags}} z-3 position-absolute opacity-75" role="alert">{{message}}</div>
+
+    {% endfor %}
+</div>
+
+
+{% endif %}
 <h2 class="mb-3">{{ subject }}</h2>
 {% crispy formset helper %}
 {% endblock %}

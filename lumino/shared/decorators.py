@@ -47,3 +47,4 @@ def auth_student_subject(func):
         else:
             return HttpResponseForbidden('No estás matriculado en esta asignatura')
     return wrapper
+

@@ -25,7 +25,7 @@ class Subject(models.Model):
         return f'{self.code}: {self.name}'
 
     def get_absolute_url(self):
-        return reverse('subjects:subject-detail', kwargs={'code': self.code})
+        return reverse('subjects:subject-detail', kwargs={'subject_code': self.code})
 
 
 class Lesson(models.Model):
