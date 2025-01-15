@@ -25,7 +25,9 @@ def is_all_marks_done(user):
 @login_required
 def subject_list(request):
     return render(
-        request, 'subjects/subject_list.html', dict(all_marks=is_all_marks_done(request.user))
+        request,
+        'subjects/subject_list.html',
+        dict(all_marks=is_all_marks_done(request.user)),
     )
 
 

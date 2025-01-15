@@ -16,10 +16,15 @@
     {% endif %}
 
     
-
+    
     {% for subject in subjects %}
-        {{subject.name}} 
+
+        {{subject.name}}
         <a href="{% url "subjects:subject-detail" subject.code %}">Ir al detalle</a>
+
+      
+        
+        
 
 
     {% empty %}
@@ -58,10 +63,6 @@
     
     
     {% endif %}
-
-
-
-
 
 
 

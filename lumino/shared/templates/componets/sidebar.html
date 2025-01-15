@@ -16,26 +16,23 @@
             <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-1 align-middle">
                 <span class="ms-1 d-none d-sm-inline"> {% translate "My subjects" %} </span> </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                    {% for subject in get_all_subjects %}
+                    {% for subject in subjects %}
                         <li class"nav-item">
                             <a href="{% url "subjects:subject-detail" subject.code %}" class="nav-link text-white">{{subject.name}}</a>
                         </li>
                 
-                {% endfor %}
-            </ul>
-           
-
-         </li>
-          <li>
-              <a href="#" class="nav-link text-white px-2">
-                  <i class="fa-solid fa-info-circle"></i> Acerca de
-              </a>
+                    {% endfor %}
+                </ul>
           </li>
           <li>
               <a href="#" class="nav-link text-white px-2">
                   <i class="fa-solid fa-sign-out-alt"></i> Salir
               </a>
           </li>
+          <li>
+            <a href="{% url 'setlang' 'en' %}?next={{ request.path }}">🇺🇸</a>
+            <a href="{% url 'setlang' 'es' %}?next={{ request.path }}">🇪🇸</a>
+        </li>
       </ul>
   </div>
 
