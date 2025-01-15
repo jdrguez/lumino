@@ -50,4 +50,19 @@
     {% endif %}
 
 
+    {% if all_marks%}
+    
+        <H1>Tus notas están aquí</H1>
+
+        <a href="{% url "subjects:certificate" %}">Descarga tu cerificado</a>
+    
+    
+    {% endif %}
+
+
+
+
+
+
+
 {% endblock content %}

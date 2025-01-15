@@ -15,13 +15,17 @@ from .forms import (
     UnEnrollForm,
 )
 from .models import Enrollment, Subject
+from .tasks import deliver_certificate
+
+
+def is_all_marks_done(user):
+    return user.enrollments.filter(mark__isnull=True).exists()
 
 
 @login_required
 def subject_list(request):
     return render(
-        request,
-        'subjects/subject_list.html',
+        request, 'subjects/subject_list.html', dict(all_marks=is_all_marks_done(request.user))
     )
 
 
@@ -173,3 +177,19 @@ def unenroll_subjects(request):
     else:
         form = UnEnrollForm(request.user)
     return render(request, 'subjects/add_enroll.html', dict(form=form))
+
+
+@login_required
+def request_certificate(request):
+    role = request.user.profile.get_role()
+    match role:
+        case 'Student':
+            if not request.user.enrollments.filter(mark__isnull=True).exists():
+                print('funciona')
+                base_url = request.build_absolute_uri('/')
+                deliver_certificate.delay(base_url, request.user)
+                return render(request, 'subjects/certificates/send.html')
+            else:
+                return HttpResponseForbidden('No te han puesto todas las notas')
+        case 'Teacher':
+            return HttpResponseForbidden('No tienes acceso a certificados')

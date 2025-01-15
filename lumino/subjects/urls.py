@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.subject_list, name='subject-list'),
     path('enroll/', views.enroll_subjects, name='enroll-subjects'),
     path('unenroll/', views.unenroll_subjects, name='unenroll-subjects'),
+    path('certificate/', views.request_certificate, name='certificate'),
     re_path(
         '(?P<subject_code>[A-Z]{3})/lessons/(?P<lesson_pk>\d+)/$',
         views.lesson_detail,
