@@ -17,9 +17,9 @@
                 <span class="ms-1 d-none d-sm-inline"> {% translate "My subjects" %} </span> </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                     {% for subject in get_all_subjects %}
-                    <li class"nav-item">
-                        <a href="{% url "subjects:subject-detail" subject.code %}" class="nav-link text-white">{{subject.name}}</a>
-                    </li>
+                        <li class"nav-item">
+                            <a href="{% url "subjects:subject-detail" subject.code %}" class="nav-link text-white">{{subject.name}}</a>
+                        </li>
                 
                 {% endfor %}
             </ul>

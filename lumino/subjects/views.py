@@ -185,7 +185,6 @@ def request_certificate(request):
     match role:
         case 'Student':
             if not request.user.enrollments.filter(mark__isnull=True).exists():
-                print('funciona')
                 base_url = request.build_absolute_uri('/')
                 deliver_certificate.delay(base_url, request.user)
                 return render(request, 'subjects/certificates/send.html')
