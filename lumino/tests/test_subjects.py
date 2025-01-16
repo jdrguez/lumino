@@ -152,9 +152,9 @@ def test_lessons_are_displayed_within_subject_detail_for_students(client, studen
 
 
 @pytest.mark.django_db
-def test_subject_detail_is_forbidden_for_non_enrolled_students(client, teacher):
+def test_subject_detail_is_forbidden_for_non_enrolled_students(client, student):
     subject = baker.make_recipe('tests.subject')
-    client.force_login(teacher)
+    client.force_login(student)
     response = client.get(f'/subjects/{subject.code}/')
     assert response.status_code == HTTPStatus.FORBIDDEN
 
