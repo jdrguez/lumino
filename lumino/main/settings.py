@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
+    'markdownify.apps.MarkdownifyConfig',
     'shared.apps.SharedConfig',
     'users.apps.UsersConfig',
     'subjects.apps.SubjectsConfig',
@@ -82,6 +83,26 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
+
+MARKDOWNIFY = {
+    "default": {
+        "WHITELIST_TAGS": [
+            'a',
+            'abbr',
+            'acronym',
+            'b',
+            'blockquote',
+            'em',
+            'i',
+            'li',
+            'ol',
+            'p',
+            'pre'
+            'strong',
+            'ul'
+        ]
+    }
+}
 
 
 # Database

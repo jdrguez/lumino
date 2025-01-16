@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load markdownify %}
 {% block content %}
 <h1>{{lesson.title}}</h1>
-<p>{{lesson.content}}</p>
+<p>{{lesson.content|markdownify}}</p>
 {% if request.user.profile.get_role == 'Teacher' %}
 <a href="{% url 'subjects:edit-lesson' subject.code lesson.pk %}">editame</a>
 <a href="{% url 'subjects:delete-lesson' subject.code lesson.pk %}">borrame wei</a>
