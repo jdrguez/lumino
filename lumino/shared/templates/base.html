@@ -26,7 +26,10 @@
         {% endblock content %}
 
     </main>
-    <sidebar>{% include "componets/sidebar.html" %}</sidebar>
+    {% if request.user.is_authenticated %}
+      <sidebar>{% include "componets/sidebar.html" %}</sidebar>
+    {% endif %}
+
     
   </div>
 
