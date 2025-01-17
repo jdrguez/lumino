@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
   updateLayout(isSidebarVisible);
 
   // Duración de las alertas django
-  const messages = document.querySelectorAll("#alert-message");
+  const messages = document.querySelectorAll(".alert");
+  console.log(messages);
   const fadeInDuration = 1000;
   const fadeOutDuration = 1000;
   const displayDuration = 3000;
@@ -49,5 +50,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }, fadeOutDuration / 10);
     }, displayDuration);
+  });
+
+  // Botón de cerrar mensaje
+
+  const btn = document.getElementById("close-btn");
+  const mark = document.getElementById("mark-display");
+  console.log(btn);
+  console.log(mark);
+  btn.addEventListener("click", () => {
+    mark.style.display = "none";
   });
 });
