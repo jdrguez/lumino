@@ -5,7 +5,7 @@
   {% if messages %}
     <div class="messages d-flex justify-content-end mb-4" style="z-index: 1050;">
       {% for message in messages %}
-        <div class="alert alert-success {{message.tags}} z-3 position-absolute opacity-75" role="alert" style="max-width: 80%; font-size: 1.1rem;" id="#alert-message">
+        <div class="alert-message alert alert-success {{message.tags}} z-3 position-absolute opacity-75" role="alert" style="max-width: 80%; font-size: 1.1rem;" id="#alert-message">
           {{message}}
         </div>
       {% endfor %}
@@ -45,7 +45,7 @@
   {% endif %}
 
   {% if mark %}
-    <div class="alert alert-info mt-4 text-center" role="alert" style="background-color: #3498db; color: white; font-size: 1.2rem;">
+    <div class="alert-info mt-4 text-center" role="alert"  style="background-color: #3498db; color: white; font-size: 1.2rem;">
       Your mark for this subject: {{mark}}
     </div>
   {% endif %}

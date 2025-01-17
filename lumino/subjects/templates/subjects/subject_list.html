@@ -29,7 +29,7 @@
             </div>
         </div>
         {% empty %}
-        <div class="alert d-flex justify-content-between align-items-center mx-auto mt-5" 
+        <div class="d-flex justify-content-between align-items-center mx-auto mt-5" 
             style="max-width: 900px; background-color: var(--yellow); color: var(--dark-blue); padding: 1rem; border-radius: 0.5rem;">
             <div class="d-flex align-items-center">
                 <i class="bi bi-exclamation-triangle-fill me-2" style="font-size: 1.5rem;"></i>
@@ -52,11 +52,11 @@
     </div>
     {% endif %}
 
-    {% if not all_marks %}
-        <div class="row justify-content-center mt-4">
+    {% if not  all_marks %}
+        <div class="row justify-content-center mt-4" id="mark-display">
             <div class="col-md-12">
-                <div class="alert alert-warning text-center position-relative" role="alert" style="background-color: #ffd900af; color: #2c3e50;">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert-warning text-center position-relative py-3" role="alert" style="background-color: #ffd900af; color: #2c3e50;">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" id="close-btn" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h4 class="alert-heading">Your grades are here.</h4>
                     <p><a href="{% url 'subjects:certificate' %}" class="btn btn-dark" style="background-color: var(--dark-blue)">Download your certificate.</a></p>
                 </div>
