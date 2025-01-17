@@ -24,11 +24,13 @@
                     {% endfor %}
                 </ul>
           </li>
-          {% if not all_marks %}
+          <!--
+          {% if all_marks %}
             <li class="nav-item">
               <a href="{% url 'subjects:certificate' %}" class="nav-link text-white px-2"> <i class="bi bi-file-earmark-arrow-down"></i> Download your certificate</a>
             </li>
           {% endif %}
+          !-->
           <li>
             <a href="{% url 'setlang' 'en' %}?next={{ request.path }}" style="text-decoration: none;">🇺🇸</a>
             <a href="{% url 'setlang' 'es' %}?next={{ request.path }}" style="text-decoration: none;">🇪🇸</a>
