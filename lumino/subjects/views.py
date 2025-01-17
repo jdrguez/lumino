@@ -19,17 +19,16 @@ from .tasks import deliver_certificate
 
 
 def is_all_marks_done(user):
-    if user.enrollments.exists():
-        return user.enrollments.filter(mark__isnull=True).exists()
-    return False
+    return user.enrollments.filter(mark__isnull=True).exists()
 
 
 @login_required
 def subject_list(request):
+    user_enrollments = request.user.enrollments.exists()
     return render(
         request,
         'subjects/subject_list.html',
-        dict(all_marks=is_all_marks_done(request.user)),
+        dict(all_marks=is_all_marks_done(request.user), user_enrollments=user_enrollments),
     )
 
 
