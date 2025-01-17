@@ -8,7 +8,7 @@
 <div class="messages d-flex justify-content-end ">
     {% for message in messages  %}
 
-        <div class="alert alert-info {{message.tags}} z-3 position-absolute opacity-75" role="alert">{{message}}</div>
+        <div class="alert alert-info {{message.tags}} z-3 position-absolute opacity-75" role="alert" id="#alert-message">{{message}}</div>
     
     {% endfor %}
 </div>
