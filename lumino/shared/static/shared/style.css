@@ -488,9 +488,6 @@ main {
   .toggle-btn {
     display: none;
   }
-  sidebar {
-    display: none;
-  }
 }
 
 #alert-message {

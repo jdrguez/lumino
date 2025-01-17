@@ -56,8 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const btn = document.getElementById("close-btn");
   const mark = document.getElementById("mark-display");
-  console.log(btn);
-  console.log(mark);
   btn.addEventListener("click", () => {
     mark.style.display = "none";
   });
