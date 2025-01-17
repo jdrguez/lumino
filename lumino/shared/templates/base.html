@@ -29,7 +29,7 @@
 
     </main>
     {% if request.user.is_authenticated %}
-      <button class="toggle-btn" id="toggleButton">Toggle Sidebar</button>
+      <button class="toggle-btn" id="toggleButton">⇔</button>
       <sidebar id='sidebar'>{% include "componets/sidebar.html" %}</sidebar>
     {% endif %}
 
