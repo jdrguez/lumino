@@ -52,17 +52,19 @@
     </div>
     {% endif %}
     {% if user_enrollments %}
+    <div class="row justify-content-center mt-4" id="mark-display">
         {% if not all_marks %}
             <div class="row justify-content-center mt-4">
                 <div class="col-md-12">
-                    <div class="alert-warning text-center position-relative" role="alert" style="background-color: #ffd900af; color: #2c3e50;">
-                        <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <div class="alert-warning text-center position-relative py-3" role="alert" style="background-color: #ffd900af; color: #2c3e50;">
+                        <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="alert" aria-label="Close" id="close-btn"></button>
                         <h4 class="alert-heading">Your grades are here.</h4>
                         <p><a href="{% url 'subjects:certificate' %}" class="btn btn-dark" style="background-color: var(--dark-blue)">Download your certificate.</a></p>
                     </div>
                 </div>
             </div>
         {% endif %}
+    </div>
     {% endif %}
 
 </div>
