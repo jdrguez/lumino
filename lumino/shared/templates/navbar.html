@@ -1,22 +1,28 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'subjects:subject-list' %}" style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: #f2c53d; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease;"><i class="bi bi-lightbulb-fill"></i>Lumino</a>
+    <a class="navbar-brand" href="{% url 'subjects:subject-list' %}" style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: #f2c53d; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease;">
+      <i class="bi bi-lightbulb-fill"></i>Lumino
+    </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto d-flex align-items-center"> 
         
         <li class="nav-item">
-          <a class="nav-link" href="#"></a>
+          <button type="button" class="btn btn-secondary rounded me-3" style="background-color: #569cfd; border-style: none;">
+            {{ user.profile.get_role }}
+          </button>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="#">
-            {% if user.is_authenticated%}
+            {% if user.is_authenticated %}
               {% include "componets/user_button.html" %}
-            {% endif %}  
+            {% endif %}
           </a>
         </li>
         

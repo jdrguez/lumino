@@ -16,14 +16,12 @@
 {% endif %}
 
 <div class="container py-5">
-  <!-- Avatar del Usuario -->
   <div class="row justify-content-center mb-4">
       {% thumbnail user.profile.avatar "200x200" crop="center" format="PNG" as thumb %}
       <img src="{{thumb.url}}" alt="Avatar" class="img-fluid rounded-circle shadow-lg" style="width: 150px; height: 150px; object-fit: cover;">
       {% endthumbnail %}
   </div>
 
-  <!-- Información del Usuario -->
   <div class="text-center mb-4">
       <div class="d-flex justify-content-center align-items-center">
           <h1 class="mb-3" style="color: var(--dark-blue);">{{user.first_name}} {{user.last_name}}</h1> 
@@ -38,7 +36,6 @@
       <p class="lead" style="color: var(--dark-blue);">{{user.profile.bio}}</p>
   </div>
 
-  <!-- Botones de Acción -->
   {% if request.user.username == user.username %}
   <div class="d-flex justify-content-center mt-4">
       {% if request.user.profile.role == 'S' %}

@@ -10,11 +10,11 @@
         {% endfor %}
     </div>
     {% endif %}
+    <h1 >My Subjects</h1>
 
-    <!-- Cards Section -->
     <div class="row justify-content">
         {% for subject in subjects %}
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4 mt-4">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body text-center d-flex flex-column">
                     <i class="bi bi-book-fill" style="font-size: 2rem; color: var(--dark-blue);"></i>
@@ -39,7 +39,6 @@
         {% endfor %}
     </div>
 
-    <!-- Enrollment Buttons -->
     {% if request.user.profile.get_role == 'Student' %}
     <div class="d-flex justify-content-center mt-3">
         <button class="btn btn-primary" 
@@ -53,7 +52,6 @@
     </div>
     {% endif %}
 
-    <!-- Alert for Certificate -->
     {% if not all_marks %}
 <div class="row justify-content-center mt-4">
     <div class="col-md-12">
