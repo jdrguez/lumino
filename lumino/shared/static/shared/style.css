@@ -466,7 +466,7 @@ main {
   right: 20px;
   z-index: 1000;
   padding: 10px 15px;
-  background: #007bff;
+  background: var(--purple);
   color: #fff;
   border: none;
   border-radius: 50%;
