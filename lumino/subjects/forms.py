@@ -10,11 +10,21 @@ class AddLessonForm(forms.ModelForm):
         model = Lesson
         fields = ('title', 'content')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+        
 
 class EditLessonForm(forms.ModelForm):
     class Meta:
         model = Lesson
         fields = ('title', 'content')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
 
 
 class AddEnrollForm(forms.Form):
