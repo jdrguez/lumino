@@ -3,18 +3,18 @@
 
 <div class="container-fluid p-0 d-flex h-100" id="wrapper">
   <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3  text-white" style="width: 250px;">
-      <a href="#" class="navbar-brand text-white">Menú</a>
+      <a href="#" class="navbar-brand text-white"> <i class="bi bi-list"></i> Menú</a>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
               <a href="{% url "subjects:subject-list" %}" class="nav-link text-white px-2">
-                  <i class="fa-solid fa-home"></i> Inicio
+                <i class="bi bi-house"></i> Inicio
               </a>
           </li>
          
           <li class="nav-item">
             <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-1 align-middle">
-                <span class="ms-1 d-none d-sm-inline"> {% translate "My subjects" %} </span> </a>
+                <span class="ms-1 d-none d-sm-inline"> <i class="bi bi-journal-bookmark-fill"></i> {% translate "My subjects" %} </span> </a>
                 <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                     {% for subject in subjects %}
                         <li class"nav-item">
@@ -23,11 +23,6 @@
                 
                     {% endfor %}
                 </ul>
-          </li>
-          <li>
-              <a href="#" class="nav-link text-white px-2">
-                  <i class="fa-solid fa-sign-out-alt"></i> Salir
-              </a>
           </li>
           <li>
             <a href="{% url 'setlang' 'en' %}?next={{ request.path }}" style="text-decoration: none;">🇺🇸</a>

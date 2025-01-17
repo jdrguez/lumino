@@ -295,7 +295,7 @@ main {
   --nav-button-padding-y: 0.375em;
   --nav-button-border-radius: 0.375em;
   --nav-button-font-size: 17px;
-  --nav-button-hover-bg: #00bf63;
+  --nav-button-hover-bg: var(--yellow);
   --nav-button-hover-text-color: #fff;
   --nav-button-distance: 0.875em;
   /* underline */
@@ -321,7 +321,7 @@ main {
   position: relative;
   align-items: center;
   justify-content: center;
-  background: var(--burger-bg);
+  background: var(--yellow);
   width: var(--burger-diameter);
   height: var(--burger-diameter);
   border-radius: var(--burger-btn-border-radius);
@@ -354,6 +354,7 @@ main {
   right: var(--nav-position-right);
   transition: var(--burger-transition);
   margin-top: 10px;
+  z-index: 9999;
 }
 
 .popup-window legend {
@@ -388,7 +389,7 @@ main {
 
 .popup-window ul li:nth-child(1) svg,
 .popup-window ul li:nth-child(2) svg {
-  color: #00bf63;
+  color: var(--yellow);
 }
 
 .popup-window ul li:nth-child(4) svg,
@@ -462,13 +463,20 @@ main {
 
 .toggle-btn {
   position: fixed;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
   z-index: 1000;
   padding: 10px 15px;
   background: #007bff;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
 }
