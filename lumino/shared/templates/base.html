@@ -12,7 +12,7 @@
 </head>
 <body>
   {% include "navbar.html" %}
-  <div class="main-container">
+  <div class="main-container {% if not request.user.is_authenticated %}full{% endif %}" id='mainContainer'>
     
     
     <main>
@@ -27,7 +27,8 @@
 
     </main>
     {% if request.user.is_authenticated %}
-      <sidebar>{% include "componets/sidebar.html" %}</sidebar>
+      <button class="toggle-btn" id="toggleButton">Toggle Sidebar</button>
+      <sidebar id='sidebar'>{% include "componets/sidebar.html" %}</sidebar>
     {% endif %}
 
     
@@ -35,5 +36,6 @@
 
   {% include "footer.html" %}
   <script type="text/javascript" src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static "shared/main.js" %}"></script>
 </body>
 </html>
