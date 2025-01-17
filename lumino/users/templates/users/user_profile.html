@@ -16,29 +16,42 @@
 
 {% endif %}
 
-  <h1>{{user.first_name}} {{user.last_name}}</h1>
+<div class="container py-5">
+  <!-- Avatar del Usuario -->
+  <div class="row justify-content-center mb-4">
+      {% thumbnail user.profile.avatar "200x200" crop="center" format="PNG" as thumb %}
+      <img src="{{thumb.url}}" alt="Avatar" class="img-fluid rounded-circle shadow-lg" style="width: 150px; height: 150px; object-fit: cover;"
+      >
+      {% endthumbnail %}
+  </div>
 
-  <p>{{user.profile.get_role}}</p>
-  <p>{{user.email}}</p>
+  <!-- Información del Usuario -->
+  <div class="text-center mb-4">
+      <h1 class="mb-3" style="color: var(--dark-blue);">{{user.first_name}} {{user.last_name}}</h1>
+      <p class="text-muted">{{user.profile.get_role}}</p>
+      <p class="text-muted">{{user.email}}</p>
+      <p class="lead" style="color: var(--dark-blue);">{{user.profile.bio}}</p>
+  </div>
 
-
-  <p>{{user.profile.bio}}</p>
-  {%thumbnail user.profile.avatar "200x200" crop="center" format="PNG" as thumb %}
-    <img src="{{thumb.url}}" alt="Avatar">
-  {%endthumbnail%}
-
+  <!-- Botones de Acción -->
   {% if request.user.username == user.username %}
+  <div class="d-flex justify-content-center mt-4">
+      <a href="{% url 'edit-profile' %}" class="btn" 
+         style="background-color: var(--dark-blue); color: white; border-radius: 20px; padding: 0.75rem 2rem; font-weight: bold; transition: all 0.3s ease;">
+          Editar tu perfil
+      </a>
 
-
-  <a href="{% url "edit-profile"%}">Editar tu perfil</a>
-  
-  
-    {% if request.user.profile.role == 'S' %}
-      <a href="{% url "users:leave" %}">Irte de lumino</a>
-    {% endif %}
-
-
+      {% if request.user.profile.role == 'S' %}
+      <a href="{% url 'users:leave' %}" class="btn btn-danger ms-3" 
+         style="border-radius: 20px; padding: 0.75rem 2rem; font-weight: bold; transition: all 0.3s ease;">
+          Irte de Lumino
+      </a>
+      {% endif %}
+  </div>
   {% endif %}
+</div>
+
+
 {% endblock content %}
 
 

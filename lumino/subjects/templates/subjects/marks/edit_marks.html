@@ -21,6 +21,18 @@
 
 
 {% endif %}
-<h2 class="mb-3">{{ subject }}</h2>
-{% crispy formset helper %}
+
+
+<div class="container py-5">
+    <h2 class="mb-4 text-center" style="color: #2c3e50;">Editar Calificaciones de {{ subject }}</h2>
+    
+    <!-- Formulario con Crispy Forms -->
+    <div class="card shadow-sm p-4 mb-5" style="border-radius: 15px; background-color: #f7f7f7;">
+        <form method="post" class="form-horizontal">
+            {% crispy formset helper %}
+
+        </form>
+    </div>
+
+</div>
 {% endblock %}

@@ -1,34 +1,38 @@
 {% extends "base.html" %}
+
 {% block content %}
-{% if messages %}
+  <div class="container py-5">
+    {% if messages %}
+      <div class="messages d-flex justify-content-end position-relative z-3">
+        {% for message in messages %}
+          <div class="alert alert-success {{ message.tags }} position-absolute opacity-75 mb-4" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
 
-<div class="messages d-flex justify-content-end ">
-    {% for message in messages %}
+    <h2 class="text-center mb-4">{{ subject }}</h2>
 
-    <div class="alert alert-success {{message.tags}} z-3 position-absolute opacity-75" role="alert">{{message}}</div>
+    <div class="row">
+      {% for enroll in enrollments %}
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <a href="{% url 'users:user-detail' enroll.student.username %}" class="text-decoration-none">
+                <h3 class="card-title">{{ enroll.student }}</h3>
+              </a>
+              <h5 class="card-subtitle mb-2 text-muted">Calificación: {{ enroll.mark }}</h5>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
 
-    {% endfor %}
-</div>
-
-
-{% endif %}
-{{subject}}
-{% for enroll in enrollments %}
-<a href="{% url 'users:user-detail' enroll.student.username %}">
-    <h1>{{enroll.student}}</h1>
-</a>
-<h3>{{enroll.mark}}</h3>
-
-{% endfor %}
-
-<a href="{% url 'subjects:edit-marks' subject.code %}">Editar las calificaciones</a>
-
-
-
-
-
-
-
-
-
+    <div class="text-center mt-4">
+      <a href="{% url 'subjects:edit-marks' subject.code %}" class="btn btn-primary px-4 py-2" style="border-radius: 20px; font-weight: bold;">
+        Editar las calificaciones
+      </a>
+    </div>
+  </div>
 {% endblock content %}
