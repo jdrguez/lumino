@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load markdownify %}
 {% block content %}
   
   {% if messages %}
@@ -21,7 +21,7 @@
           <a href="{% url 'subjects:lesson-detail' subject.code lesson.pk %}" class="text-decoration-none text-dark">{{lesson.title}} <i class="bi bi-plus"></i>
           </a>
         </h4>
-        <p class="lesson-content" style="font-size: 1rem; color: #7f8c8d;">{{lesson.content}}</p>
+        <p class="lesson-content" style="font-size: 1rem; color: #7f8c8d;">{{lesson.content|markdownify}}</p>
 
         {% if request.user.profile.get_role == 'Teacher' %}
           <div class="lesson-actions mt-3">

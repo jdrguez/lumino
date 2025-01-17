@@ -21,10 +21,10 @@ body {
 
 .main-container {
   display: grid;
-  grid-template-areas: "sidebar main ";
+  grid-template-areas: "sidebar main right";
   flex: 1;
-  padding: 20px;
-  grid-template-columns: 200px 1fr;
+  padding: 10px;
+  grid-template-columns: 200px 1fr 180px;
   grid-template-rows: auto;
   gap: 100px;
   transition: all 0.3s ease;
@@ -42,8 +42,8 @@ main {
 }
 
 .main-container.full {
-  grid-template-areas: "main";
-  grid-template-columns: 1fr;
+  grid-template-areas: "left main right";
+  grid-template-columns: 200px 1fr 200px;
 }
 
 .navbar {
@@ -242,7 +242,6 @@ main {
   font-weight: bold;
   text-transform: uppercase;
   color: #fff;
-
 }
 
 .custom-btn-filled:hover {
@@ -334,8 +333,8 @@ main {
 }
 
 .popup-window {
-  position: absolute; 
-  z-index: 1050; 
+  position: absolute;
+  z-index: 1050;
   transform: scale(var(--nav-default-scale));
   visibility: hidden;
   opacity: 0;
@@ -467,7 +466,7 @@ main {
   right: 20px;
   z-index: 1000;
   padding: 10px 15px;
-  background: #007bff;
+  background: var(--purple);
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -479,4 +478,17 @@ main {
   align-items: center;
   justify-content: center;
   font-size: 16px;
+}
+
+@media (max-width: 1300px) {
+  .main-container {
+    grid-template-areas: "main";
+    grid-template-columns: 1fr;
+  }
+  .toggle-btn {
+    display: none;
+  }
+  sidebar {
+    display: none;
+  }
 }
