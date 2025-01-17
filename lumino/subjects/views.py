@@ -19,7 +19,9 @@ from .tasks import deliver_certificate
 
 
 def is_all_marks_done(user):
-    return user.enrollments.filter(mark__isnull=True).exists()
+    if user.enrollments.exists():
+        return user.enrollments.filter(mark__isnull=True).exists()
+    return False
 
 
 @login_required
