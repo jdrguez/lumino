@@ -52,7 +52,7 @@ class UnEnrollForm(forms.Form):
         self.helper.form_show_labels = False
         self.helper.layout = Layout(
             Field('subjects'),
-            Submit('enroll', 'Enroll'),
+            Submit('unenroll', 'Unenroll'),
         )
 
 

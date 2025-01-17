@@ -59,7 +59,6 @@ def lesson_detail(request, subject_code, lesson_pk):
 
 @login_required
 @validate_type_user
-# @auth_teacher
 @auth_user_subject
 def add_lesson(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
@@ -77,7 +76,6 @@ def add_lesson(request, subject_code):
 
 @login_required
 @validate_type_user
-# @auth_teacher
 @auth_user_subject
 def edit_lesson(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
@@ -94,7 +92,6 @@ def edit_lesson(request, subject_code, lesson_pk):
 
 @login_required
 @validate_type_user
-# @auth_teacher
 @auth_user_subject
 def delete_lesson(request, subject_code, lesson_pk):
     subject = Subject.objects.get(code=subject_code)
@@ -106,7 +103,6 @@ def delete_lesson(request, subject_code, lesson_pk):
 
 @login_required
 @validate_type_user
-# @auth_teacher
 @auth_user_subject
 def mark_list(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
@@ -118,7 +114,6 @@ def mark_list(request, subject_code):
 
 @login_required
 @validate_type_user
-# @auth_teacher
 @auth_user_subject
 def edit_marks(request, subject_code):
     subject = Subject.objects.get(code=subject_code)
@@ -146,11 +141,10 @@ def edit_marks(request, subject_code):
         dict(subject=subject, formset=formset, helper=helper),
     )
 
-    # breadcrumbs=breadcrumbs
-
 
 @login_required
 def enroll_subjects(request):
+    message = 'Enroll in a subject'
     if request.method == 'POST':
         if (form := AddEnrollForm(request.user, data=request.POST)).is_valid():
             subjects = form.cleaned_data['subjects']
@@ -162,11 +156,12 @@ def enroll_subjects(request):
             return HttpResponseForbidden('Tienes que legir al menos una!')
     else:
         form = AddEnrollForm(request.user)
-    return render(request, 'subjects/add_enroll.html', dict(form=form))
+    return render(request, 'subjects/add_enroll.html', dict(form=form, message=message))
 
 
 @login_required
 def unenroll_subjects(request):
+    message = 'Unenroll from a subject'
     if request.method == 'POST':
         if (form := UnEnrollForm(request.user, data=request.POST)).is_valid():
             subjects = form.cleaned_data['subjects']
@@ -178,7 +173,7 @@ def unenroll_subjects(request):
             return HttpResponseForbidden('Tienes que elegir al menos una!')
     else:
         form = UnEnrollForm(request.user)
-    return render(request, 'subjects/add_enroll.html', dict(form=form))
+    return render(request, 'subjects/add_enroll.html', dict(form=form, message=message))
 
 
 @login_required
