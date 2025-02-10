@@ -1,0 +1,12 @@
+site_name: Lumino
+
+extra_javascript:
+  - "https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+
+nav:
+  - Home: index.md
+  - Accounts: accounts.md
+  - Subjects: subjects.md
+  - Users: users.md
+  - Shared: shared.md
+  - Main: main.md
