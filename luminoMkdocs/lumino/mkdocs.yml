@@ -10,3 +10,6 @@ nav:
   - Users: users.md
   - Shared: shared.md
   - Main: main.md
+
+theme:
+  name: material
