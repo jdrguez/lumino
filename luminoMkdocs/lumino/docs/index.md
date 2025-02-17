@@ -13,7 +13,7 @@ El proyecto está dividido en cuatro aplicaciones principales, cada una con una 
 1. **Accounts**: Se encarga de gestionar las credenciales de acceso de los usuarios, permitiendo la creación, edición y eliminación de cuentas, así como la autenticación y autorización en el sistema.
 2. **Subjects**: Organiza y clasifica las Asignaturas y las lecciones de conocimiento impartidas por un profesor.
 3. **Users**: Administra los perfiles de los usuarios, incluyendo roles dentro de la aplicación de cada uno.
-4. **Shared**:  Permite compartir recursos, archivos o datos entre las diferentes aplicaciones dentro de Lumino.
+4. **Shared**: Permite compartir recursos, archivos o datos entre las diferentes aplicaciones dentro de Lumino.
 
 ## Instalación y Configuración
 
@@ -26,7 +26,7 @@ cd lumino
 
 # Crear y activar un entorno virtual
 python -m venv venv
-source venv/bin/activate 
+source venv/bin/activate
 
 # Instalar dependencias
 pip install -r requirements.txt
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 # Configurar base de datos
 python manage.py migrate
 
-# Crear un superusuario 
+# Crear un superusuario
 python manage.py createsuperuser
 
 # Ejecutar el servidor
@@ -60,22 +60,3 @@ http://127.0.0.1:8000/admin/
 ## Contacto
 
 Para dudas o sugerencias, puedes ponerte en contacto con el equipo de desarrollo a través de [correo/contacto].
-
-
-# Welcome to MkDocs
-
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
-
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.

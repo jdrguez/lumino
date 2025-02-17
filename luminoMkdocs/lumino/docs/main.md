@@ -14,7 +14,7 @@ Este archivo contiene la configuración de Lumino, como la configuración de la 
 
 Algunas cosas a destacar:
 
-* **login url**
+- **login url**
 
 Es una configuración que define la URL a la que se redirige a los usuarios no autenticados, facilitando la gestión de la autenticación en la aplicación.
 
@@ -22,7 +22,7 @@ Es una configuración que define la URL a la que se redirige a los usuarios no a
 LOGIN_URL = 'login'
 ```
 
-* **Media conf**
+- **Media conf**
 
 Estas configuraciones se utilizan para gestionar cómo se manejan los archivos multimedia y los archivos estáticos.
 
@@ -33,7 +33,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATICFILES_DIRS = [BASE_DIR / 'node_modules']
 ```
 
-* **i18n**
+- **i18n**
 
 Habilitamos el uso de i18n
 
@@ -41,7 +41,7 @@ Habilitamos el uso de i18n
 USE_I18N = True
 ```
 
-* **Markdownify**
+- **Markdownify**
 
 Es un diccionario que contiene configuraciones para el procesamiento de texto en formato Markdown. Esto permite que los usuarios ingresen utilizando bases de markdown que se convierte a HTML.
 
@@ -67,7 +67,7 @@ MARKDOWNIFY = {
 }
 ```
 
-* **Crispy**
+- **Crispy**
 
 Estas configuraciones permiten utilizar Bootstrap 5 como el framework de diseño para los formularios en una app que utiliza Django Crispy Forms. Esto facilita la creación de formularios visualmente atractivos y responsivos
 
@@ -76,7 +76,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 ```
 
-* **Email conf**
+- **Email conf**
 
 Estas configuraciones permiten a una aplicación Django enviar correos electrónicos utilizando el servidor SMTP de Brevo.
 
@@ -88,7 +88,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='josedomingo.rguez.rguez@gmail.com')
 ```
 
-* **Certificate conf**
+- **Certificate conf**
 
 Define una ruta específica dentro del directorio de archivos multimedia de la aplicación para almacenar certificado de calificaciones solicitados por los estudiantes.
 
@@ -119,15 +119,14 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ```
 
-* **admin/** Panel de administración de Django.
+- **admin/** Panel de administración de Django.
 
-* **Include**  Incluye las url del módulo correspondiente
+- **Include** Incluye las url del módulo correspondiente
 
-* **__reload___** Incluye las url para el paquete django-browser-reload recargague automáticamente la página durante el desarrollo.
+- \***\*reload\_\*\*** Incluye las url para el paquete django-browser-reload recargague automáticamente la página durante el desarrollo.
 
-* **+ static (settings.STATIC_URL, document_root=settings.STATIC_ROOT)** Esta línea agrega la configuración para servir archivos estáticos durante el desarrollo. settings.STATIC_URL es la url base para acceder a los archivos estáticos, y settings.STATIC_ROOT es el directorio donde se almacenan esos archivos.
+- **+ static (settings.STATIC_URL, document_root=settings.STATIC_ROOT)** Esta línea agrega la configuración para servir archivos estáticos durante el desarrollo. settings.STATIC_URL es la url base para acceder a los archivos estáticos, y settings.STATIC_ROOT es el directorio donde se almacenan esos archivos.
 
-* **if settings.DEBUG** Si la configuración de Django está en modo de depuración se agrega la configuración para servir archivos multimedia.
+- **if settings.DEBUG** Si la configuración de Django está en modo de depuración se agrega la configuración para servir archivos multimedia.
 
-* **urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)** Esto permite que los archivos multimedia subidos por los usuarios sean accesibles a través de la url definida en settings.MEDIA_URL, utilizando el directorio especificado en settings.MEDIA_ROOT.
-
+- **urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)** Esto permite que los archivos multimedia subidos por los usuarios sean accesibles a través de la url definida en settings.MEDIA_URL, utilizando el directorio especificado en settings.MEDIA_ROOT.
