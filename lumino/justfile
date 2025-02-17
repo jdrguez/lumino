@@ -52,7 +52,7 @@ create-venv:
         then
             uv venv --seed
         else
-            python -m venv {{ venv-name }} --prompt {{ project }}
+            python3 -m venv {{ venv-name }} --prompt {{ project }}
         fi
     fi
 
